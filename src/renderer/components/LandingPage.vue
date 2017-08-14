@@ -20,6 +20,11 @@ export default {
     return {
       match: {
         gameType:1,
+        cort: 1,
+        redname:'',
+        bluename:'',
+        referee: '',
+        lineReferee:'',
         init: false
 
       }
