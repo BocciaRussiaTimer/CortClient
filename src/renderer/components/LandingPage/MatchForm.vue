@@ -18,11 +18,11 @@
   </div>
   <div class="form-group">
     <label for="redname">{{match.gameType>3?"Название команды, которая":"Имя игрока, который"}} играет красными</label>
-    <input class="form-control" id="redname" v-model="match.redname" >
+    <input class="form-control" id="redname" v-model="match.players.red.name" >
   </div>
   <div class="form-group">
     <label for="bluename">{{match.gameType>3?"Название команды, которая":"Имя игрока, который"}} играет синими</label>
-    <input class="form-control" id="bluename" v-model="match.bluename" >
+    <input class="form-control" id="bluename" v-model="match.players.blue.name" >
   </div>
 
   <div class="form-group">
@@ -31,7 +31,7 @@
   </div>
   <div class="form-group">
     <label for="referee">Имя Фамилия линейного судьи</label>
-    <input  class="form-control" id="referee" v-model="match.linereferee" >
+    <input  class="form-control" id="referee" v-model="match.lineReferee" >
   </div>
   <button type="submit" class="btn btn-primary">Сохранить</button>
 </form>
