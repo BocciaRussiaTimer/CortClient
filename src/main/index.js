@@ -1,4 +1,6 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
+
+
 
 /**
  * Set `__static` path to static files in production
@@ -8,7 +10,7 @@ if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
 
-let mainWindow
+let refereeWindow, playerWindow
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`
@@ -17,16 +19,28 @@ function createWindow () {
   /**
    * Initial window options
    */
-  mainWindow = new BrowserWindow({
+  refereeWindow = new BrowserWindow({
     height: 563,
     useContentSize: true,
     width: 1000
   })
 
-  mainWindow.loadURL(winURL)
+  refereeWindow.loadURL(winURL+'#referee')
 
-  mainWindow.on('closed', () => {
-    mainWindow = null
+  refereeWindow.on('closed', () => {
+    refereeWindow = null
+  })
+
+  playerWindow = new BrowserWindow({
+    height: 563,
+    useContentSize: true,
+    width: 1000
+  })
+
+  playerWindow.loadURL(winURL+'#player')
+
+  playerWindow.on('closed', () => {
+    playerWindow = null
   })
 }
 
@@ -39,7 +53,11 @@ app.on('window-all-closed', () => {
 })
 
 app.on('activate', () => {
-  if (mainWindow === null) {
+  if (refereeindow === null || playerWindow==null) {
     createWindow()
   }
+})
+
+ipcMain.on('mainMatch', (event, data)=>{
+  playerWindow.webContents.send('playerMatch', data)
 })
