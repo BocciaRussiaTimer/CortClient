@@ -1,13 +1,12 @@
 <template>
   <div id="wrapper">
-  
     <header>
       <h1>BocciaTimer</h1>
     </header>
     <main>
       <match-form v-if="!match.init" :match.sync="match"></match-form>
       <timer v-else :match.sync="match"></timer>
-      <controlls></controlls>
+      <controlls :match.sync="match"></controlls>
     </main>
       </div>
 </template>
@@ -16,49 +15,23 @@
 import MatchForm from './LandingPage/MatchForm'
 import Timer from './LandingPage/Timer'
 import Controlls from './LandingPage/Controlls'
+import store from '@/store'
+
 
 export default {
   data() {
-    return {
-      match: {
-        gameType:1,
-        cort: 1,
-        players:{
-          red:{
-            side: 'red',
-            name:'Бакаидов Иван',
-            score:[0,0,0,0],
-            time:[240,240,240,240]                                    
-          },
-          blue:{
-            side:'blue',
-            name:'Цыплина Диана',
-            score:[0,0,0,0],
-            time:[240,240,240,240]                                    
-          },
-        },
-
-        end: 0,
-        referee: 'Мухортов Алексей',
-        lineReferee: 'Легостаев Сергей',
-        init: true
-
-      }
-    }
+    return store;
+    
   },
   components: { MatchForm, Timer, Controlls },
-  methods: {
-    open(link) {
-      this.$electron.shell.openExternal(link)
-    }
-  }
 }
 </script>
 
 <style>
 header {
   position: absolute;
-  background: #734324;
+    background-image: linear-gradient(to right , #c00, lightblue);
+
   color: #bcdcbc;
   left: 0;
   top: 0;

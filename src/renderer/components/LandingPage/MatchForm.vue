@@ -22,7 +22,7 @@
   </div>
   <div class="form-group">
     <label for="bluename">{{match.gameType>3?"Название команды, которая":"Имя игрока, который"}} играет синими</label>
-    <input class="form-control" id="bluename" v-model="match.players.blue.name" >
+  <input class="form-control" id="bluename" v-model="match.players.blue.name" >
   </div>
 
   <div class="form-group">

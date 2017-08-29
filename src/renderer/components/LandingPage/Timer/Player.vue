@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-if="player.side==='red'" v-for="(t, index) in player.time" :class="{'table-active':index===match.end}" >                 
+                <tr v-if="player.side==='red'" v-for="(t, index) in player.time" :class="{'table-active':index===match.end,'table-success':index<match.end}" >                 
                     <td>{{index+1}}</td>
                     <td>
                         <input disabled :value="secondsToTime(t)"></input>
@@ -26,7 +26,7 @@
                         <input type="number" v-model="player.score[index]"></input>
                     </td>
                 </tr>
-                <tr v-if="player.side==='blue'" v-for="(t, index) in player.time" :class="{'table-active':index===match.end}">
+                <tr v-if="player.side==='blue'" v-for="(t, index) in player.time" :class="{'table-active':index===match.end,'table-success':index<match.end}">
                     <td>
                         <input type="number" v-model="player.score[index]"></input>
                     </td>
@@ -70,6 +70,7 @@ export default {
     border-top-style: solid;
     border-top-width: 1vh;
     width: 30vw;
+    height: 40vh;
 }
 
 .player-red {
@@ -80,7 +81,7 @@ export default {
 
 .player-blue {
     right: 20vh;
-    border-top-color: #33f;
+    border-top-color:  #33f;
 }
 
 .name{
@@ -94,5 +95,10 @@ export default {
 .player-red th {
     text-align: right;
 }
+
+input{
+    width: 5vw;
+}
+
 </style>
 
