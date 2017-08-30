@@ -3,7 +3,7 @@
         <button class="btn" @click="match.end--">Предыдущий энд</button>
         <button class="btn" @click="timer('red')" :class="{'btn-success':match.players.red.ticking}">Запустить время красных</button>
         <button class="btn" @click="match.init=!match.init" :class="{'btn-success':!match.init}">Информация о игре</button>
-    
+
         <button class="btn" @click="timer('blue')" :class="{'btn-success':match.players.blue.ticking}">Запустить время синих</button>
         <button class="btn" @click="match.end++">Следующий энд</button>
     </div>
@@ -11,29 +11,45 @@
 
 <script>
 import Vue from "Vue";
+import swalert from 'sweetalert'
+import swalertcss from 'sweetalert/dist/sweetalert.css'
 
-let ctimerid;
-let cplayer =null;
 export default {
     props: ['match'],
+    data () {
+        return {
+            timerid:null,
+            player: null
+        }
+    },
     methods: {
         timer(side) {
             let player = this.match.players[side];
-            if (cplayer != null) {
-                clearInterval(ctimerid);
-                cplayer.ticking = false;
-                if (player.side === cplayer.side) {
-                    cplayer = null;
-                    return;
-                }
-            }
-            ctimerid = setInterval(()=>{this.tick()}, 1000);
-            cplayer=player;
-            player.ticking=true;
+            this.stop();
+            this.player = player;
+            player.ticking = true;
+            this.timerid = setInterval(() => { this.tick() }, 1000);
+            if (player.time[this.match.end] < 1) return this.timeover();
+            
 
         },
-        tick(){
-            Vue.set(cplayer.time, this.match.end, cplayer.time[this.match.end]-1);
+        tick() {
+            Vue.set(this.player.time, this.match.end, this.player.time[this.match.end] - 1);
+            if (this.player.time[this.match.end] < 1) {
+                this.timeover();
+            }
+        },
+        timeover() {
+            swal("Время вышло!", `У ${this.player.side == 'red' ? 'красной' : 'синий'} стороны закончилось время`, "info")
+
+            this.stop();
+        },
+        stop() {
+            if (this.player != null) {
+                clearInterval(this.timerid);
+                this.player.ticking = false;
+                this.player = null;
+            }
         }
     }
 }
