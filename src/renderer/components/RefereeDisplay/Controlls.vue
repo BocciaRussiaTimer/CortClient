@@ -9,7 +9,8 @@
 </template>
 
 <script>
-import Vue from "Vue";
+import Vue from "Vue"
+import { remote } from 'electron'
 import swalert from 'sweetalert'
 import swalertcss from 'sweetalert/dist/sweetalert.css'
 
@@ -27,7 +28,7 @@ export default {
             this.stop();
             if (this.player != null && this.player.side == player.side) {
                 this.player = null;
-                
+
                 return;
             }
             this.player = player;
@@ -40,8 +41,8 @@ export default {
         tick() {
             Vue.set(this.player.time, this.match.end, this.player.time[this.match.end] - 1);
             if (this.player.time[this.match.end] < 1) {
-                this.player = null;
                 this.timeover();
+                this.player = null;
             }
         },
         timeover() {
@@ -56,7 +57,48 @@ export default {
                 clearInterval(this.timerid);
                 this.player.ticking = false;
             }
+        },
+        keydown(e) {
+            console.log(e.keyCode)
+            if (!this.match.init) return;
+            switch (e.keyCode) {
+                case 83:
+                    this.timer('red')
+                    break;
+                case 75:
+                    this.timer('blue')
+                    break;
+                case 32:
+                    this.stop()
+                    break;
+                case 78:
+                    this.stop();
+                    this.match.end++;
+                    break;
+                case 65:
+                    Vue.set(this.match.players.red.time, this.match.end, this.match.players.red.time[this.match.end] - 1);
+                    break;
+                    case 68:
+                    Vue.set(this.match.players.red.time, this.match.end, this.match.players.red.time[this.match.end] + 1);
+
+                    break;
+                case 74:
+                    Vue.set(this.match.players.blue.time, this.match.end, this.match.players.blue.time[this.match.end] - 1);
+                    break;
+                    case 76:
+                    Vue.set(this.match.players.blue.time, this.match.end, this.match.players.blue.time[this.match.end] + 1);
+
+                    break;
+            }
+
+            return true;
         }
+    },
+    mounted() {
+        window.addEventListener('keydown', this.keydown)
+    },
+    destroyed() {
+        window.removeEventListener('keydown', this.keydown)
     }
 }
 </script>
