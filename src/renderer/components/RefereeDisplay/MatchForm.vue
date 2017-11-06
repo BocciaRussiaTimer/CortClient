@@ -55,10 +55,13 @@ export default {
     reset(){
       this.match.gameType=1;
       this.match.end=0;
-      this.referee='';
-      this.lineReferee='';
-      this.resetScore(this.players.red.score)
-      this.resetScore(this.players.blue.score)
+      this.match.referee='';
+      this.match.lineReferee='';
+      this.match.players.red.name = '';
+      this.match.players.blue.name = '';
+
+      this.resetScore(this.match.players.red.score)
+      this.resetScore(this.match.players.blue.score)
     },
     resetScore(score){
       score.forEach((element, index) =>{
