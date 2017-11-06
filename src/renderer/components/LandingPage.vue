@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import bootstrap from 'bootstrap/dist/css/bootstrap.min.css'
 import RefereeDisplay from './RefereeDisplay'
 import PlayerDisplay from './PlayerDisplay'
 

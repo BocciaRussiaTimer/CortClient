@@ -3,8 +3,7 @@
         <side :match='match' :player='match.players.red'></side>
         <side :match='match' :player='match.players.blue'></side>
         <div class="info">
-            <h2>Энд</h2>
-            <h1>{{match.end+1}}</h1>
+            {{match.end+1}}
         </div>
     </div>
 </template>
@@ -48,8 +47,8 @@ export default {
     height: 25vh;
     position: absolute;
     left: 37.5vw;
-    top: 37.5vh;
     background: #ada;
     text-align: center;
+    font-size: 20vh;
 }
 </style>

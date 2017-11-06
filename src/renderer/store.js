@@ -1,7 +1,7 @@
 module.exports = {
     match: {
         get gameType() {
-            return this._gameType;
+            return this._gameType||0;
         },
         set gameType(v) {
             v=+v;
@@ -25,8 +25,6 @@ module.exports = {
                     time = 420;
                     break;
                 case 6:
-            console.log(v)
-            
                     time = 300;
                     break;
             }
@@ -45,23 +43,28 @@ module.exports = {
             red: {
                 ticking: false,
                 side: 'red',
-                name: 'Дарт Вейдер',
+                name: '',
                 score: [0, 0, 0, 0],
                 time: [240, 240, 240, 240]
             },
             blue: {
                 ticking: false,
                 side: 'blue',
-                name: 'Люк Скайуокер',
+                name: '',
                 score: [0, 0, 0, 0],
                 time: [240, 240, 240, 240]
             },
         },
 
         end: 0,
-        referee: 'Мухортов Алексей',
-        lineReferee: 'Легостаев Сергей',
+        referee: '',
+        lineReferee: '',
         init: false
 
+    },
+    server:{
+        protocol:'http',
+        port:30101,
+        domain:'127.0.0.1'
     }
 };

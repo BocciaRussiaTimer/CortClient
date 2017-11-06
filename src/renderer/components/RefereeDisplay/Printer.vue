@@ -1,28 +1,30 @@
 <template>
-        <input type="button" class="btn btn-primary" @click="print" value="Отправить протокол на печать"></input>
+    <input type="button" class="btn btn-primary" value="Печать" @click="print">
+    </input>
 </template>
 
 <script>
+import { server } from '@/store'
 export default {
-    props: ['match'],
-    data(){
-        return {
-            protocol:'http',
-            domain:'127.0.0.1',
-            port: 30101
-        };
-    },
-    computed:{
-        url(){
-            return `${this.protocol}://${this.domain}:${this.port}/print`;
+    props:['match'],
+    computed: {
+        url() {
+            return `${server.protocol}://${server.domain}:${server.port}/`;
         }
     },
-    methods:{
-        print(){
-            this.$http.post(this.url, this.match).then((data)=>{
-                
-            })
+    methods: {
+        print() {
+            console.log('send print')
+            let data = JSON.stringify(this.match);
+            this.$http({ url: this.url + 'print', method: 'post', headers: { 'Content-Type': 'application/json' }, data }).then((result) => {
+                console.log(result);
+            });
+
         }
     }
 }
 </script>
+
+<style scoped>
+
+</style>

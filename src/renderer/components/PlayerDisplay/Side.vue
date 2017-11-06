@@ -1,6 +1,6 @@
 <template>
   <div class="side" :class="{'red':player.side==='red', 'blue':player.side==='blue'}">
-      <h2>{{player.name}}</h2>
+      <h1>{{player.name}}</h1>
       <h1 class="big">{{commonScore(player.score)}}</h1>
       <h1 class="big">{{secondsToTime(player.time[match.end])}}</h1>
   </div>
@@ -33,9 +33,8 @@ export default {
         height: 100vh;
         position: absolute;
         text-align: center;
-        padding-top: 10vw;
-
-        color: #123231;
+        color:white;
+        font-weight: 100px;
     }
     .red{
         background-color: red;
@@ -45,7 +44,7 @@ export default {
         right: 0;
     }
     .big {
-        font-size: 20vh;
+        font-size: 34vh;
     }
 
 </style>

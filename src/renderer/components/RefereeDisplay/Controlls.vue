@@ -53,7 +53,6 @@ export default {
         stop() {
 
             if (this.player != null) {
-                console.log('stop')
                 clearInterval(this.timerid);
                 this.player.ticking = false;
             }

@@ -34,8 +34,8 @@
       <input class="form-control" id="referee" v-model="match.lineReferee">
     </div>
     <div class="form-group">
-    <printer/>
-    <button type="submit" class="btn btn-primary">Сохранить</button>
+      <printer :match.sync='match'></printer>
+      <button type="submit" class="btn btn-primary">Сохранить</button>
     </div>
   </form>
 </template>
@@ -45,7 +45,7 @@ import Printer from './Printer'
 
 export default {
   props: ['match'],
-  components: { Printer },
+  components: {Printer},
   methods: {
     submit() {
       this.match.init = true;
