@@ -34,6 +34,8 @@
       <input class="form-control" id="referee" v-model="match.lineReferee">
     </div>
     <div class="form-group">
+      <button type="reset" class="btn btn-primary" @click='reset'>Обнулить</button>
+      
       <printer :match.sync='match'></printer>
       <button type="submit" class="btn btn-primary">Сохранить</button>
     </div>
@@ -49,6 +51,19 @@ export default {
   methods: {
     submit() {
       this.match.init = true;
+    }, 
+    reset(){
+      this.match.gameType=1;
+      this.match.end=0;
+      this.referee='';
+      this.lineReferee='';
+      this.resetScore(this.players.red.score)
+      this.resetScore(this.players.blue.score)
+    },
+    resetScore(score){
+      score.forEach((element, index) =>{
+        score[index]=0;
+      });
     }
   }
 }
