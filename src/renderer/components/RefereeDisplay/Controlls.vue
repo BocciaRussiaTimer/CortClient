@@ -5,6 +5,9 @@
         <button class="btn" @click="match.init=!match.init" :class="{'btn-success':!match.init}">Информация о игре</button>
         <button class="btn" @click="timer('blue')" :class="{'btn-success':match.players.blue.ticking}">Запустить время синих</button>
         <button class="btn" @click="match.end++">Следующий энд</button>
+        <button class="btn" @click="match.tiebreak=!match.tiebreak" :class="{'btn-success':match.tiebreak}">Тай-брейк</button>
+        
+
     </div>
 </template>
 
